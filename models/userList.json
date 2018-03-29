@@ -1,0 +1,23 @@
+{
+    "userListName": "Default Users",
+    "users": [
+        {
+            "ID": "1",
+            "FirstName": "Johnny",
+            "LastName": "Appleseed",
+            "Popularity": "9"
+        },
+        {
+            "ID": "2",
+            "FirstName": "Eugene",
+            "LastName": "Frink",
+            "Popularity": "3"
+        },
+        {
+            "ID": "3",
+            "FirstName": "Caleb",
+            "LastName": "Smith",
+            "Popularity": "6"
+        }
+    ]
+}
