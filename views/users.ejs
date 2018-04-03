@@ -13,10 +13,26 @@
     <div class="jumbotron">
         <h2>These are default users:</h2>
         
-        <% users.users.forEach(function(user) { %>
-            <p>User #<%= user.ID %> is named <%= user.FirstName %> <%= user.LastName %> and has a popularity level of: <%= user.Popularity %>.</p>
+        <% user.users.forEach(function(user) { %>
+            <p>User, aged <%= user.age %>, is named <%= user.firstName %> <%= user.lastName %> and has a popularity level of: <%= user.popularity %>.</p>
         <% }); %>
         
+    </div>
+    <div class="jumbotron">
+        <h2>Add a user:</h2>
+        <form action="/users/create" method="post">
+
+            <label>First Name</label>
+            <input type="text" name="firstName">
+            <label>Last Name</label>
+            <input type="text" name="lastName">
+            <label>Popularity</label>
+            <input type="number" name="popularity">
+            <label>Age</label>
+            <input type="number" name="age">
+
+            <button type="submit">Add User</button>
+        </form>
     </div>
 </main>
 
