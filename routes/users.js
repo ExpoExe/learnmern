@@ -1,17 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var usersController = require('../controllers/users');
-var users = require('../models/userList.json');
 
-/* GET users listing. */
+/* Get users */
 router.get('/', function(req, res, next) {
     console.log('Tried for users.');
-    var userJson = usersController.getUserJson;
-    console.log(userJson);
-    res.render('users', {title:'MERN', user:users});
-
+    usersController.getAllUsers(function(users){
+        res.render('users', {title:'MERN', user:users});
+    });
 });
 
+/* Add a user */
 router.post('/create', usersController.createUser);
+
+/* Update a user */
+router.post('/update', usersController.updateUser);
+
+/* Delete a user */
+router.post('/delete', usersController.deleteUser);
+
 
 module.exports = router;
