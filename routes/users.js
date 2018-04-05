@@ -3,11 +3,11 @@ var router = express.Router();
 var usersController = require('../controllers/users');
 
 /* Get users */
-router.get('/', function(req, res, next) {
-    console.log('Tried for users.');
-    usersController.getAllUsers(function(users){
-        res.render('users', {title:'MERN', user:users});
-    });
+router.get('/', function (req, res) {
+	console.log('Tried for users.');
+	usersController.getAllUsers(function (users) {
+		res.render('users', { title: 'MERN', user: users });
+	});
 });
 
 /* Add a user */

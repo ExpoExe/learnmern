@@ -10,10 +10,10 @@ mongoose.connect('mongodb://localhost:27017/learnmern').then(res => console.log(
 
 // If the Node process ends, close the Mongoose connection 
 process.on('SIGINT', function() {  
-  mongoose.connection.close(function () { 
-    console.log('Mongoose default connection disconnected through app termination'); 
-    process.exit(0); 
-  }); 
+	mongoose.connection.close(function () { 
+		console.log('Mongoose default connection disconnected through app termination'); 
+		process.exit(0); 
+	}); 
 }); 
 
 // BRING IN YOUR SCHEMAS & MODELS
