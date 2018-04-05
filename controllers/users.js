@@ -1,7 +1,14 @@
 var Users = require('../models/users');
 var assert = require('assert');
 
-exports.createUser = function (req, res) {
+exports.getAllUsers = function (cb) {
+	Users.find({}, function (err, users) {
+		assert.equal(null, err);
+		cb(users);
+	});
+};
+
+exports.createUser = function (req, res, next) {
 	console.log('Attempting to create user...');
 
 	var user = new Users({
@@ -21,7 +28,7 @@ exports.createUser = function (req, res) {
 	});
 };
 
-exports.updateUser = function (req, res) {
+exports.updateUser = function (req, res, next) {
 	console.log('Attempting to update user...');
 	if (Object.keys(req.body.lastName).length === 0) {
 		console.log('No last name!');
@@ -47,7 +54,7 @@ exports.updateUser = function (req, res) {
 	});
 };
 
-exports.deleteUser = function (req, res) {
+exports.deleteUser = function (req, res, next) {
 	console.log('Attempting to delete user...');
 	Users.findByIdAndRemove(req.body.id, function (err) {
 		if (err) return next(err);
@@ -55,11 +62,4 @@ exports.deleteUser = function (req, res) {
 		res.redirect('/users');
 	});
 
-};
-
-exports.getAllUsers = function (cb) {
-	Users.find({}, function (err, users) {
-		assert.equal(null, err);
-		cb(users);
-	});
 };
