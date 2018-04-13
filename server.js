@@ -1,6 +1,6 @@
+var path = require('path');
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -16,8 +16,8 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // set up routes
-var indexRouter = require('./api/index');
-var usersRouter = require('./api/users');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 app.use(logger('dev'));
 app.use(express.json());

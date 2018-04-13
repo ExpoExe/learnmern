@@ -1,9 +1,11 @@
 var express = require('express');
-var router = express.Router();
 var usersController = require('../controllers/users');
+
+var router = express.Router();
 
 /* Get users */
 router.get('/', function (req, res) {
+	console.log('Getting users from DB...');
 	usersController.getAllUsers(function (users) {
 		res.json(users);
 	});

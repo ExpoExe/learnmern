@@ -1,14 +1,14 @@
 var Users = require('../models/users');
 var assert = require('assert');
 
-exports.getAllUsers = function (cb) {
+module.exports.getAllUsers = function (cb) {
 	Users.find({}, function (err, users) {
 		assert.equal(null, err);
 		cb(users);
 	});
 };
 
-exports.createUser = function (req, res, next) {
+module.exports.createUser = function (req, res, next) {
 	console.log('Attempting to create user...');
 
 	var user = new Users({
@@ -28,14 +28,14 @@ exports.createUser = function (req, res, next) {
 	});
 };
 
-exports.updateUser = function (req, res, next) {
+module.exports.updateUser = function (req, res, next) {
 	console.log('Attempting to update user...');
-	if (Object.keys(req.body.lastName).length === 0) {
-		console.log('No last name!');
+	if (Object.keys(req.body._id).length === 0) {
+		console.log('No ID!');
 		return;
 	}
 
-	var query = { 'lastName': req.body.lastName };
+	var query = { '_id': req.body._id };
 	var update = {
 		$set: {
 			firstName: req.body.firstName,
@@ -54,7 +54,7 @@ exports.updateUser = function (req, res, next) {
 	});
 };
 
-exports.deleteUser = function (req, res, next) {
+module.exports.deleteUser = function (req, res, next) {
 	console.log('Attempting to delete user...');
 	Users.findByIdAndRemove(req.body.id, function (err) {
 		if (err) return next(err);
