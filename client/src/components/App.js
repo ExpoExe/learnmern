@@ -1,6 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import Users from './Users';
-import Other from './Other';
+import Login from './Login';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -13,11 +12,7 @@ class App extends React.Component {
 		return (
 			<Router>
 				<div>
-					<li><Link to='/users'>See Users</Link></li>
-					<li><Link to='/other'>Other</Link></li>
-
-					<Route path='/users' component={Users} />
-					<Route path='/other' component={Other} />
+					<Login/>
 				</div>
 			</Router>
 		);
