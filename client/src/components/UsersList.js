@@ -28,7 +28,6 @@ class UsersList extends React.Component{
 				{this.state.isLoading === true
 					?  <Loading />
 					:  <div>
-						<h3>These are the users:</h3>
 						{this.state.users.map(user => 
 							<li key={user._id}>User is named: {user.firstName} {user.lastName}.</li>
 						)}

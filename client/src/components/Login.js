@@ -1,7 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import { Redirect } from 'react-router-dom';
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'; // eslint-disable-line no-unused-vars
-import { Route, Link } from 'react-router-dom';
-import Users from './Users';
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -9,15 +8,17 @@ export default class Login extends React.Component {
 
 		this.state = {
 			loginEmail: '',
-			loginPassword: ''
+			loginPassword: '',
+			loggedIn: false
 		};
 
 		this.updateInput = this.updateInput.bind(this);
+		this.handleLogin = this.handleLogin.bind(this);
 
 	}
 
 	validateForm() {
-		return this.state.email.length > 0 && this.state.password.length > 0;
+		return this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0;
 	}
 
 	updateInput (e) {
@@ -28,35 +29,44 @@ export default class Login extends React.Component {
 
 	handleLogin (e) {
 		e.preventDefault();
+		this.setState({
+			loggedIn: true
+		});
 	}
 
 	render() {
-		return (
-			<div style={{maxWidth: '600px', margin: '20% auto 0 auto'}}>
-				<Container fluid>
-					<h2>CRM</h2>
-					<Form>
-						<FormGroup row>
-							<Label for="loginEmail" sm={2}>Email</Label>
-							<Col sm={10}>
-								<Input onChange={this.updateInput} value={this.state.loginEmail} type="email" name="email" id="loginEmail" />
-							</Col>
-						</FormGroup>
-						<FormGroup row>
-							<Label for="loginPassword" sm={2}>Password</Label>
-							<Col sm={10}>
-								<Input onChange={this.updateInput} value={this.state.loginPassword} type="password" name="password" id="loginPassword"  />
-							</Col>
-						</FormGroup>
-						<FormGroup row>
-							<Col sm={12}>
-								<Link to='/users'><Button block>Login</Button></Link>
-							</Col>
-						</FormGroup>
-					</Form>
-				</Container>
-				<Route path='/users' component={Users} />
-			</div>
-		);
+		if(this.state.loggedIn){
+			return(
+				<Redirect to='/users' />
+			);
+		} else {
+				
+			return (
+				<div style={{maxWidth: '600px', margin: '20% auto 0 auto'}}>
+					<Container fluid>
+						<h2>CRM</h2>
+						<Form onSubmit={this.handleLogin}>
+							<FormGroup row>
+								<Label for="loginEmail" sm={2}>Email</Label>
+								<Col sm={10}>
+									<Input onChange={this.updateInput} value={this.state.loginEmail} type="email" name="email" id="loginEmail" />
+								</Col>
+							</FormGroup>
+							<FormGroup row>
+								<Label for="loginPassword" sm={2}>Password</Label>
+								<Col sm={10}>
+									<Input onChange={this.updateInput} value={this.state.loginPassword} type="password" name="password" id="loginPassword"  />
+								</Col>
+							</FormGroup>
+							<FormGroup row>
+								<Col sm={12}>
+									<Button disabled={!this.validateForm()} block>Login</Button>
+								</Col>
+							</FormGroup>
+						</Form>
+					</Container>
+				</div>
+			);
+		}
 	}
 }
