@@ -1,5 +1,11 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import Loading from './Loading';
+import Loading from './Loading'; // eslint-disable-line no-unused-vars
+import { 
+	Container, 
+	Col, 
+	Button, 
+	Table
+} from 'reactstrap';
 
 class UsersList extends React.Component{
 	constructor(props){
@@ -12,30 +18,46 @@ class UsersList extends React.Component{
 	}
 
 	componentDidMount(){
-
 		fetch('/users')
 			.then(res => res.json())
 			.then(users => this.setState({
 				users: users, 
 				isLoading: false
 			}));
-		
 	}
 
 	render() {
 		return (
-			<div>
+			<div style={{maxWidth:'900px', margin:'2% auto'}}>
 				{this.state.isLoading === true
 					?  <Loading />
-					:  <div>
-						{this.state.users.map(user => 
-							<li key={user._id}>User is named: {user.firstName} {user.lastName}.</li>
-						)}
-					</div>}
+					:  <Table responsive striped>
+						<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Age</th>
+								<th>Popularity</th>
+								<th>ID</th>
+							</tr>
+						</thead>
+						<tbody>
+							{this.state.users.map(user => 
+								<tr key={user._id}>
+									<td>{user.firstName}</td>
+									<td>{user.lastName}</td>
+									<td>{user.age}</td>
+									<td>{user.popularity}</td>
+									<td>{user._id}</td>
+								</tr>
+							)}
+						</tbody>
+					</Table>}
 
 			</div>
 		);
 	}
+
 }
 
 export default UsersList;

@@ -1,5 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom'; // eslint-disable-line no-unused-vars
 import { Container, Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap'; // eslint-disable-line no-unused-vars
 
 export default class Login extends React.Component {
@@ -7,7 +7,7 @@ export default class Login extends React.Component {
 		super(props);
 
 		this.state = {
-			loginEmail: '',
+			loginUsername: '',
 			loginPassword: '',
 			loggedIn: false
 		};
@@ -18,7 +18,7 @@ export default class Login extends React.Component {
 	}
 
 	validateForm() {
-		return this.state.loginEmail.length > 0 && this.state.loginPassword.length > 0;
+		return this.state.loginUsername.length > 0 && this.state.loginPassword.length > 0;
 	}
 
 	updateInput (e) {
@@ -47,9 +47,9 @@ export default class Login extends React.Component {
 						<h2>CRM</h2>
 						<Form onSubmit={this.handleLogin}>
 							<FormGroup row>
-								<Label for="loginEmail" sm={2}>Email</Label>
+								<Label for="loginUsername" sm={2}>Username</Label>
 								<Col sm={10}>
-									<Input onChange={this.updateInput} value={this.state.loginEmail} type="email" name="email" id="loginEmail" />
+									<Input onChange={this.updateInput} value={this.state.loginUsername} type="text" name="username" id="loginUsername" />
 								</Col>
 							</FormGroup>
 							<FormGroup row>
